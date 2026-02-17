@@ -120,4 +120,41 @@ export const transactionService = {
 
     if (error) throw error
   },
+
+  async deleteImportedTransactions(userId: string): Promise<number> {
+    const { data, error } = await supabase
+      .from('transactions')
+      .delete()
+      .eq('user_id', userId)
+      .like('notes', 'Importado%')
+      .select('id')
+
+    if (error) throw error
+    return data?.length ?? 0
+  },
+
+  async bulkCreateTransactions(
+    data: TransactionInsert[]
+  ): Promise<{ created: number; errors: string[] }> {
+    const CHUNK_SIZE = 100
+    let created = 0
+    const errors: string[] = []
+
+    for (let i = 0; i < data.length; i += CHUNK_SIZE) {
+      const chunk = data.slice(i, i + CHUNK_SIZE)
+
+      const { data: result, error } = await supabase
+        .from('transactions')
+        .insert(chunk)
+        .select('id')
+
+      if (error) {
+        errors.push(`Erro ao importar lote ${Math.floor(i / CHUNK_SIZE) + 1}: ${error.message}`)
+      } else {
+        created += result?.length ?? 0
+      }
+    }
+
+    return { created, errors }
+  },
 }

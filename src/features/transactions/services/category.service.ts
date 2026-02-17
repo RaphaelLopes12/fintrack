@@ -1,7 +1,35 @@
 import { supabase } from '@/lib/supabase'
+import { DEFAULT_CATEGORIES } from '@/lib/constants'
 import type { Category, CategoryInsert, CategoryUpdate } from '@/types'
 
 export const categoryService = {
+  async seedDefaultCategories(userId: string): Promise<Category[]> {
+    const inserts: CategoryInsert[] = [
+      ...DEFAULT_CATEGORIES.income.map((c) => ({
+        user_id: userId,
+        name: c.name,
+        type: 'income' as const,
+        icon: c.icon,
+        color: c.color,
+      })),
+      ...DEFAULT_CATEGORIES.expense.map((c) => ({
+        user_id: userId,
+        name: c.name,
+        type: 'expense' as const,
+        icon: c.icon,
+        color: c.color,
+      })),
+    ]
+
+    const { data, error } = await supabase
+      .from('categories')
+      .insert(inserts)
+      .select()
+
+    if (error) throw error
+    return data ?? []
+  },
+
   async getCategories(
     userId: string,
     type?: 'income' | 'expense'

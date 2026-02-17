@@ -10,11 +10,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/features/auth/hooks/use-auth'
 import { transactionService } from '@/features/transactions/services/transaction.service'
 import { formatDateShort } from '@/lib/format'
+import { ImportDialog } from './import-dialog'
 
 function formatAmountForCsv(amount: number): string {
   return amount.toFixed(2).replace('.', ',')
@@ -23,6 +23,7 @@ function formatAmountForCsv(amount: number): string {
 export function DataSettings() {
   const user = useAuth((state) => state.user)
   const [isExporting, setIsExporting] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
 
   async function handleExportCsv() {
     if (!user?.id) {
@@ -112,28 +113,30 @@ export function DataSettings() {
 
         <Separator />
 
-        {/* Import section (placeholder) */}
+        {/* Import section */}
         <div className="flex items-start gap-4">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
             <Upload className="size-5 text-muted-foreground" />
           </div>
           <div className="flex-1 space-y-1">
-            <div className="flex items-center gap-2">
-              <h4 className="text-sm font-medium">Importar Transações</h4>
-              <Badge variant="secondary" className="text-[10px]">
-                Em breve
-              </Badge>
-            </div>
+            <h4 className="text-sm font-medium">Importar Transações</h4>
             <p className="text-sm text-muted-foreground">
-              Importe transações a partir de um arquivo CSV ou extrato bancário.
+              Importe transações a partir de um arquivo CSV ou extrato bancário
+              OFX. Compatível com os principais bancos brasileiros.
             </p>
-            <Button size="sm" className="mt-3" disabled>
+            <Button
+              size="sm"
+              className="mt-3"
+              onClick={() => setImportOpen(true)}
+            >
               <Upload className="size-4" />
-              Importar CSV
+              Importar CSV/OFX
             </Button>
           </div>
         </div>
       </CardContent>
+
+      <ImportDialog open={importOpen} onOpenChange={setImportOpen} />
     </Card>
   )
 }
