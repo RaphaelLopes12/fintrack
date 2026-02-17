@@ -18,10 +18,10 @@ import { ThemeToggle } from '@/components/layout/theme-toggle'
 
 const pageTitles: Record<string, string> = {
   '/': 'Dashboard',
-  '/transactions': 'Transacoes',
-  '/transactions/new': 'Nova Transacao',
-  '/credit-cards': 'Cartoes',
-  '/settings': 'Configuracoes',
+  '/transactions': 'Transações',
+  '/transactions/new': 'Nova Transação',
+  '/credit-cards': 'Cartões',
+  '/settings': 'Configurações',
 }
 
 function getPageTitle(pathname: string): string {
@@ -30,11 +30,11 @@ function getPageTitle(pathname: string): string {
   }
 
   if (/^\/transactions\/[^/]+\/edit$/.test(pathname)) {
-    return 'Editar Transacao'
+    return 'Editar Transação'
   }
 
   if (/^\/credit-cards\/[^/]+$/.test(pathname)) {
-    return 'Detalhes do Cartao'
+    return 'Detalhes do Cartão'
   }
 
   return 'FinTrack'
@@ -56,7 +56,7 @@ export function Header() {
   const { open } = useSidebarStore()
 
   const displayName =
-    user?.user_metadata?.full_name ?? user?.email ?? 'Usuario'
+    user?.user_metadata?.full_name ?? user?.email ?? 'Usuário'
   const avatarUrl = user?.user_metadata?.avatar_url as string | undefined
   const pageTitle = getPageTitle(location.pathname)
 
@@ -125,7 +125,7 @@ export function Header() {
             <DropdownMenuItem asChild>
               <a href="/settings" className="flex items-center gap-2">
                 <Settings className="size-4" />
-                <span>Configuracoes</span>
+                <span>Configurações</span>
               </a>
             </DropdownMenuItem>
             <DropdownMenuSeparator />

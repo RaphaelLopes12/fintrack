@@ -90,7 +90,7 @@ export function InvoiceList({ cardId, billingDay, dueDay }: InvoiceListProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-muted-foreground">
-          Historico de Faturas
+          Histórico de Faturas
         </h3>
         <Select value={selectedYear} onValueChange={setSelectedYear}>
           <SelectTrigger className="w-[120px]">

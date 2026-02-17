@@ -53,7 +53,7 @@ export function CategoryBreakdown({ month, year }: CategoryBreakdownProps) {
           <EmptyState
             icon={PieChartIcon}
             title="Sem despesas"
-            description="Nenhuma despesa registrada neste periodo."
+            description="Nenhuma despesa registrada neste período."
             className="py-8"
           />
         </CardContent>

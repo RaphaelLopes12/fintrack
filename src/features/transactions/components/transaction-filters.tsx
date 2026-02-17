@@ -100,7 +100,7 @@ export function TransactionFilters({
             <div className="relative flex-1 sm:w-64">
               <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Buscar transacoes..."
+                placeholder="Buscar transações..."
                 className="pl-9"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}

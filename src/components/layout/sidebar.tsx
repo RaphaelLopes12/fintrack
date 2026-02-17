@@ -23,17 +23,17 @@ const navItems = [
     icon: LayoutDashboard,
   },
   {
-    label: 'Transacoes',
+    label: 'Transações',
     href: '/transactions',
     icon: ArrowLeftRight,
   },
   {
-    label: 'Cartoes',
+    label: 'Cartões',
     href: '/credit-cards',
     icon: CreditCard,
   },
   {
-    label: 'Configuracoes',
+    label: 'Configurações',
     href: '/settings',
     icon: Settings,
   },
@@ -55,7 +55,7 @@ export function Sidebar() {
   const location = useLocation()
 
   const displayName =
-    user?.user_metadata?.full_name ?? user?.email ?? 'Usuario'
+    user?.user_metadata?.full_name ?? user?.email ?? 'Usuário'
   const avatarUrl = user?.user_metadata?.avatar_url as string | undefined
 
   return (

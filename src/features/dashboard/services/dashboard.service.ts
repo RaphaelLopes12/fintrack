@@ -134,7 +134,7 @@ export const dashboardService = {
     }))
   },
 
-  async getUpcomingInvoices(_userId: string): Promise<UpcomingInvoice[]> {
+  async getUpcomingInvoices(): Promise<UpcomingInvoice[]> {
     const today = new Date()
     const thirtyDaysFromNow = new Date()
     thirtyDaysFromNow.setDate(today.getDate() + 30)

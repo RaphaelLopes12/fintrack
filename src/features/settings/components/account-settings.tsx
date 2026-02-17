@@ -46,7 +46,7 @@ export function AccountSettings() {
           <div className="flex-1 space-y-1">
             <h4 className="text-sm font-medium">Sair da conta</h4>
             <p className="text-sm text-muted-foreground">
-              Voce sera desconectado de todos os dispositivos e precisara fazer
+              Você será desconectado de todos os dispositivos e precisará fazer
               login novamente.
             </p>
             <Button
@@ -84,7 +84,7 @@ export function AccountSettings() {
             </div>
             <p className="text-sm text-muted-foreground">
               Exclua permanentemente sua conta e todos os dados associados. Esta
-              acao nao pode ser desfeita.
+              ação não pode ser desfeita.
             </p>
             <Button size="sm" variant="destructive" className="mt-3" disabled>
               <Trash2 className="size-4" />

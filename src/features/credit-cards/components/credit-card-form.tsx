@@ -112,12 +112,12 @@ export function CreditCardForm({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {isEditing ? 'Editar Cartao' : 'Novo Cartao'}
+            {isEditing ? 'Editar Cartão' : 'Novo Cartão'}
           </DialogTitle>
           <DialogDescription>
             {isEditing
-              ? 'Atualize as informacoes do seu cartao de credito.'
-              : 'Adicione um novo cartao de credito para gerenciar suas faturas.'}
+              ? 'Atualize as informações do seu cartão de crédito.'
+              : 'Adicione um novo cartão de crédito para gerenciar suas faturas.'}
           </DialogDescription>
         </DialogHeader>
 
@@ -132,7 +132,7 @@ export function CreditCardForm({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome do Cartao</FormLabel>
+                  <FormLabel>Nome do Cartão</FormLabel>
                   <FormControl>
                     <Input placeholder="Ex: Nubank, Inter..." {...field} />
                   </FormControl>
@@ -147,7 +147,7 @@ export function CreditCardForm({
               name="last_four_digits"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ultimos 4 Digitos</FormLabel>
+                  <FormLabel>Últimos 4 Dígitos</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="1234"
@@ -259,7 +259,7 @@ export function CreditCardForm({
               name="color"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Cor do Cartao</FormLabel>
+                  <FormLabel>Cor do Cartão</FormLabel>
                   <FormControl>
                     <div className="flex flex-wrap gap-2">
                       {COLOR_PALETTE.map((color) => (
@@ -286,7 +286,7 @@ export function CreditCardForm({
             {/* Submit */}
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-              {isEditing ? 'Atualizar Cartao' : 'Criar Cartao'}
+              {isEditing ? 'Atualizar Cartão' : 'Criar Cartão'}
             </Button>
           </form>
         </Form>

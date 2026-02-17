@@ -26,7 +26,7 @@ export function DataSettings() {
 
   async function handleExportCsv() {
     if (!user?.id) {
-      toast.error('Usuario nao autenticado.')
+      toast.error('Usuário não autenticado.')
       return
     }
 
@@ -36,12 +36,12 @@ export function DataSettings() {
       const transactions = await transactionService.getTransactions(user.id)
 
       if (transactions.length === 0) {
-        toast.info('Nenhuma transacao encontrada para exportar.')
+        toast.info('Nenhuma transação encontrada para exportar.')
         setIsExporting(false)
         return
       }
 
-      const header = 'Data;Tipo;Descricao;Categoria;Valor;Cartao de Credito'
+      const header = 'Data;Tipo;Descrição;Categoria;Valor;Cartão de Crédito'
       const rows = transactions.map((t) => {
         const date = formatDateShort(t.date)
         const type = t.type === 'income' ? 'Receita' : 'Despesa'
@@ -67,9 +67,9 @@ export function DataSettings() {
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
 
-      toast.success(`${transactions.length} transacao(oes) exportada(s) com sucesso!`)
+      toast.success(`${transactions.length} transação(ões) exportada(s) com sucesso!`)
     } catch {
-      toast.error('Erro ao exportar transacoes. Tente novamente.')
+      toast.error('Erro ao exportar transações. Tente novamente.')
     } finally {
       setIsExporting(false)
     }
@@ -88,10 +88,10 @@ export function DataSettings() {
             <FileSpreadsheet className="size-5 text-muted-foreground" />
           </div>
           <div className="flex-1 space-y-1">
-            <h4 className="text-sm font-medium">Exportar Transacoes</h4>
+            <h4 className="text-sm font-medium">Exportar Transações</h4>
             <p className="text-sm text-muted-foreground">
-              Baixe todas as suas transacoes em formato CSV. O arquivo utiliza
-              ponto-e-virgula como separador, compativel com Excel e Google
+              Baixe todas as suas transações em formato CSV. O arquivo utiliza
+              ponto-e-vírgula como separador, compatível com Excel e Google
               Sheets no formato brasileiro.
             </p>
             <Button
@@ -119,13 +119,13 @@ export function DataSettings() {
           </div>
           <div className="flex-1 space-y-1">
             <div className="flex items-center gap-2">
-              <h4 className="text-sm font-medium">Importar Transacoes</h4>
+              <h4 className="text-sm font-medium">Importar Transações</h4>
               <Badge variant="secondary" className="text-[10px]">
                 Em breve
               </Badge>
             </div>
             <p className="text-sm text-muted-foreground">
-              Importe transacoes a partir de um arquivo CSV ou extrato bancario.
+              Importe transações a partir de um arquivo CSV ou extrato bancário.
             </p>
             <Button size="sm" className="mt-3" disabled>
               <Upload className="size-4" />

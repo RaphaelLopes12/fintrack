@@ -10,14 +10,14 @@ function SettingsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Configuracoes"
-        description="Gerencie seu perfil e preferencias"
+        title="Configurações"
+        description="Gerencie seu perfil e preferências"
       />
 
       <Tabs defaultValue="profile">
         <TabsList className="w-full justify-start overflow-x-auto sm:w-auto">
           <TabsTrigger value="profile">Perfil</TabsTrigger>
-          <TabsTrigger value="appearance">Aparencia</TabsTrigger>
+          <TabsTrigger value="appearance">Aparência</TabsTrigger>
           <TabsTrigger value="categories">Categorias</TabsTrigger>
           <TabsTrigger value="data">Dados</TabsTrigger>
           <TabsTrigger value="account">Conta</TabsTrigger>

@@ -143,7 +143,7 @@ export function CategoryForm({
           <DialogDescription>
             {isEditing
               ? 'Atualize os dados da categoria.'
-              : 'Crie uma nova categoria para suas transacoes.'}
+              : 'Crie uma nova categoria para suas transações.'}
           </DialogDescription>
         </DialogHeader>
 
@@ -202,7 +202,7 @@ export function CategoryForm({
               name="icon"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Icone</FormLabel>
+                  <FormLabel>Ícone</FormLabel>
                   <FormControl>
                     <div className="grid grid-cols-6 gap-2">
                       {ICON_OPTIONS.map((icon) => (

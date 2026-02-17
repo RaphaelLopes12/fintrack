@@ -52,7 +52,7 @@ export function DashboardSummary({ month, year }: DashboardSummaryProps) {
         className="border-l-4 border-l-violet-500"
       />
       <StatCard
-        title="Transacoes"
+        title="Transações"
         value={String(transactionCount)}
         icon={ArrowLeftRight}
         className="border-l-4 border-l-orange-500"

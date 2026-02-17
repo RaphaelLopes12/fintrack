@@ -39,7 +39,7 @@ function RegisterPage() {
               <h1 className="text-4xl font-bold">FinTrack</h1>
             </div>
             <p className="text-lg text-white/80">
-              Gerencie suas financas de forma inteligente
+              Gerencie suas finanças de forma inteligente
             </p>
           </div>
 
@@ -51,7 +51,7 @@ function RegisterPage() {
               <div>
                 <p className="font-medium">Acompanhe seus gastos</p>
                 <p className="text-sm text-white/70">
-                  Visualize para onde seu dinheiro esta indo com graficos
+                  Visualize para onde seu dinheiro está indo com gráficos
                   detalhados
                 </p>
               </div>
@@ -64,7 +64,7 @@ function RegisterPage() {
               <div>
                 <p className="font-medium">Economize mais</p>
                 <p className="text-sm text-white/70">
-                  Defina metas e acompanhe sua evolucao financeira
+                  Defina metas e acompanhe sua evolução financeira
                 </p>
               </div>
             </div>

@@ -1,10 +1,10 @@
 import { z } from 'zod/v4'
 
 export const creditCardSchema = z.object({
-  name: z.string().min(1, 'Nome e obrigatorio'),
+  name: z.string().min(1, 'Nome é obrigatório'),
   last_four_digits: z
     .string()
-    .regex(/^\d{4}$/, 'Informe exatamente 4 digitos'),
+    .regex(/^\d{4}$/, 'Informe exatamente 4 dígitos'),
   brand: z.enum([
     'visa',
     'mastercard',
@@ -24,7 +24,7 @@ export const creditCardSchema = z.object({
     .int()
     .min(1, 'Dia deve ser entre 1 e 31')
     .max(31, 'Dia deve ser entre 1 e 31'),
-  color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida'),
+  color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor inválida'),
 })
 
 export type CreditCardFormData = z.infer<typeof creditCardSchema>

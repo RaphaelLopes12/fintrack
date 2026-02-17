@@ -79,7 +79,7 @@ export function TransactionForm({
   const { data: creditCards = [] } = useQuery({
     queryKey: ['credit-cards', user?.id],
     queryFn: async () => {
-      if (!user?.id) throw new Error('Usuario nao autenticado')
+      if (!user?.id) throw new Error('Usuário não autenticado')
       const { data, error } = await supabase
         .from('credit_cards')
         .select('*')
@@ -182,9 +182,9 @@ export function TransactionForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Descricao</FormLabel>
+              <FormLabel>Descrição</FormLabel>
               <FormControl>
-                <Input placeholder="Ex: Supermercado, Salario..." {...field} />
+                <Input placeholder="Ex: Supermercado, Salário..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -269,7 +269,7 @@ export function TransactionForm({
             name="credit_card_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Cartao de Credito (opcional)</FormLabel>
+                <FormLabel>Cartão de Crédito (opcional)</FormLabel>
                 <Select
                   onValueChange={(value) =>
                     field.onChange(value === '__none__' ? null : value)
@@ -278,11 +278,11 @@ export function TransactionForm({
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Nenhum cartao" />
+                      <SelectValue placeholder="Nenhum cartão" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="__none__">Nenhum cartao</SelectItem>
+                    <SelectItem value="__none__">Nenhum cartão</SelectItem>
                     {creditCards.map((card) => (
                       <SelectItem key={card.id} value={card.id}>
                         <div className="flex items-center gap-2">
@@ -311,7 +311,7 @@ export function TransactionForm({
               <div className="space-y-0.5">
                 <FormLabel>Recorrente</FormLabel>
                 <p className="text-sm text-muted-foreground">
-                  Esta transacao se repete periodicamente?
+                  Esta transação se repete periodicamente?
                 </p>
               </div>
               <FormControl>
@@ -331,14 +331,14 @@ export function TransactionForm({
             name="recurring_frequency"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Frequencia</FormLabel>
+                <FormLabel>Frequência</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   value={field.value ?? undefined}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione a frequencia" />
+                      <SelectValue placeholder="Selecione a frequência" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -362,12 +362,12 @@ export function TransactionForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                <StickyNote className="inline size-4" /> Observacoes (opcional)
+                <StickyNote className="inline size-4" /> Observações (opcional)
               </FormLabel>
               <FormControl>
                 <textarea
                   className="border-input bg-transparent placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm shadow-xs focus-visible:ring-[3px] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Adicione observacoes sobre esta transacao..."
+                  placeholder="Adicione observações sobre esta transação..."
                   {...field}
                   value={field.value ?? ''}
                 />
@@ -380,7 +380,7 @@ export function TransactionForm({
         {/* Submit */}
         <Button type="submit" className="w-full" disabled={isSubmitting}>
           {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-          {defaultValues ? 'Atualizar Transacao' : 'Criar Transacao'}
+          {defaultValues ? 'Atualizar Transação' : 'Criar Transação'}
         </Button>
       </form>
     </Form>

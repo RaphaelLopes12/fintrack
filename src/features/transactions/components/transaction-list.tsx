@@ -191,8 +191,8 @@ export function TransactionList({
         onOpenChange={(open) => {
           if (!open) setDeleteId(null)
         }}
-        title="Excluir Transacao"
-        description="Tem certeza que deseja excluir esta transacao? Esta acao nao pode ser desfeita."
+        title="Excluir Transação"
+        description="Tem certeza que deseja excluir esta transação? Esta ação não pode ser desfeita."
         onConfirm={() => {
           if (deleteId) onDelete(deleteId)
         }}

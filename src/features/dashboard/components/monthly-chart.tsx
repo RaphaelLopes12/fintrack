@@ -15,11 +15,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { formatCurrency } from '@/lib/format'
 import { useMonthlyTrend } from '@/features/dashboard/hooks/use-dashboard-data'
 
-interface MonthlyChartProps {
-  month: number
-  year: number
-}
-
 const chartConfig = {
   income: {
     label: 'Receitas',
@@ -31,14 +26,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function MonthlyChart(_props: MonthlyChartProps) {
+export function MonthlyChart() {
   const { data: trend, isLoading } = useMonthlyTrend(6)
 
   if (isLoading) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Evolucao Mensal</CardTitle>
+          <CardTitle>Evolução Mensal</CardTitle>
         </CardHeader>
         <CardContent>
           <Skeleton className="h-[300px] w-full" />
@@ -50,7 +45,7 @@ export function MonthlyChart(_props: MonthlyChartProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Evolucao Mensal</CardTitle>
+        <CardTitle>Evolução Mensal</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[300px] w-full">

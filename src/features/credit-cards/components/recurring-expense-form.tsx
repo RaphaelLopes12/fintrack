@@ -135,7 +135,7 @@ export function RecurringExpenseForm({
           </DialogTitle>
           <DialogDescription>
             {isEditing
-              ? 'Atualize as informacoes da assinatura.'
+              ? 'Atualize as informações da assinatura.'
               : 'Adicione uma nova assinatura ou despesa recorrente.'}
           </DialogDescription>
         </DialogHeader>
@@ -151,7 +151,7 @@ export function RecurringExpenseForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descricao</FormLabel>
+                  <FormLabel>Descrição</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: Netflix, Spotify..."
@@ -220,7 +220,7 @@ export function RecurringExpenseForm({
               name="credit_card_id"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Cartao de Credito (opcional)</FormLabel>
+                  <FormLabel>Cartão de Crédito (opcional)</FormLabel>
                   <Select
                     onValueChange={(value) =>
                       field.onChange(value === '__none__' ? null : value)
@@ -229,11 +229,11 @@ export function RecurringExpenseForm({
                   >
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Nenhum cartao" />
+                        <SelectValue placeholder="Nenhum cartão" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="__none__">Nenhum cartao</SelectItem>
+                      <SelectItem value="__none__">Nenhum cartão</SelectItem>
                       {creditCards.map((card) => (
                         <SelectItem key={card.id} value={card.id}>
                           <div className="flex items-center gap-2">
@@ -258,11 +258,11 @@ export function RecurringExpenseForm({
               name="frequency"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Frequencia</FormLabel>
+                  <FormLabel>Frequência</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecione a frequencia" />
+                        <SelectValue placeholder="Selecione a frequência" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -284,7 +284,7 @@ export function RecurringExpenseForm({
               name="start_date"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Data de Inicio</FormLabel>
+                  <FormLabel>Data de Início</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>

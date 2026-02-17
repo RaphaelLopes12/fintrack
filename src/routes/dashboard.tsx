@@ -21,7 +21,7 @@ function DashboardPage() {
     <div className="space-y-6">
       <PageHeader
         title="Dashboard"
-        description="Visao geral das suas financas"
+        description="Visão geral das suas finanças"
       >
         <MonthSelector
           month={selectedMonth}
@@ -33,7 +33,7 @@ function DashboardPage() {
       <DashboardSummary month={selectedMonth} year={selectedYear} />
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <MonthlyChart month={selectedMonth} year={selectedYear} />
+        <MonthlyChart />
         <CategoryBreakdown month={selectedMonth} year={selectedYear} />
       </div>
 

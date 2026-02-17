@@ -38,7 +38,7 @@ function TransactionNewPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Nova Transacao"
+        title="Nova Transação"
         description="Adicione uma nova receita ou despesa"
       />
       <Card className="mx-auto max-w-2xl">

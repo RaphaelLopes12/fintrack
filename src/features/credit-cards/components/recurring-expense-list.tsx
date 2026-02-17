@@ -51,7 +51,7 @@ export function RecurringExpenseList({ cardId }: RecurringExpenseListProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-muted-foreground">
-          Assinaturas e Recorrencias
+          Assinaturas e Recorrências
         </h3>
         <Button size="sm" onClick={() => setIsFormOpen(true)}>
           <Plus className="size-4" />
@@ -171,7 +171,7 @@ export function RecurringExpenseList({ cardId }: RecurringExpenseListProps) {
           if (!open) setDeletingId(null)
         }}
         title="Excluir Assinatura"
-        description="Tem certeza que deseja excluir esta assinatura? Esta acao nao pode ser desfeita."
+        description="Tem certeza que deseja excluir esta assinatura? Esta ação não pode ser desfeita."
         variant="destructive"
         confirmText="Excluir"
         onConfirm={() => {

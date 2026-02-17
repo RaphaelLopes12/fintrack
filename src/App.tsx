@@ -4,8 +4,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'sonner'
 import { queryClient } from '@/lib/query-client'
 import { router } from '@/router'
+import { useTheme } from '@/hooks/use-theme'
 
 export default function App() {
+  useTheme()
+
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

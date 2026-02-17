@@ -15,16 +15,16 @@ function NotFoundPage() {
         </h1>
 
         <h2 className="mt-2 text-xl font-semibold text-foreground">
-          Pagina nao encontrada
+          Página não encontrada
         </h2>
 
         <p className="mt-2 max-w-md text-sm text-muted-foreground">
-          A pagina que voce esta procurando nao existe ou foi movida para outro
-          endereco.
+          A página que você está procurando não existe ou foi movida para outro
+          endereço.
         </p>
 
         <Button asChild className="mt-8">
-          <Link to="/">Voltar ao inicio</Link>
+          <Link to="/">Voltar ao início</Link>
         </Button>
       </div>
     </div>

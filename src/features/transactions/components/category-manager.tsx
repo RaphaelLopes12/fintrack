@@ -104,7 +104,7 @@ export function CategoryManager() {
             <div className="flex shrink-0 items-center gap-0.5">
               {category.is_default && (
                 <Badge variant="secondary" className="mr-1 text-[10px]">
-                  Padrao
+                  Padrão
                 </Badge>
               )}
               <Button
@@ -175,8 +175,8 @@ export function CategoryManager() {
         title="Excluir Categoria"
         description={
           usageCount && usageCount > 0
-            ? `Esta categoria possui ${usageCount} transacao(oes) vinculada(s) e nao pode ser excluida. Remova ou altere as transacoes antes.`
-            : 'Tem certeza que deseja excluir esta categoria? Esta acao nao pode ser desfeita.'
+            ? `Esta categoria possui ${usageCount} transação(ões) vinculada(s) e não pode ser excluída. Remova ou altere as transações antes.`
+            : 'Tem certeza que deseja excluir esta categoria? Esta ação não pode ser desfeita.'
         }
         onConfirm={handleConfirmDelete}
         confirmText={usageCount && usageCount > 0 ? 'Entendido' : 'Excluir'}

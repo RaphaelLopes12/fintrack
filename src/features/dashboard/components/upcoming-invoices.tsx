@@ -48,7 +48,7 @@ export function UpcomingInvoices() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Faturas Proximas</CardTitle>
+          <CardTitle>Faturas Próximas</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -65,13 +65,13 @@ export function UpcomingInvoices() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Faturas Proximas</CardTitle>
+          <CardTitle>Faturas Próximas</CardTitle>
         </CardHeader>
         <CardContent>
           <EmptyState
             icon={CalendarClock}
-            title="Nenhuma fatura proxima"
-            description="Nao ha faturas de cartao vencendo nos proximos 30 dias."
+            title="Nenhuma fatura próxima"
+            description="Não há faturas de cartão vencendo nos próximos 30 dias."
             className="py-8"
           />
         </CardContent>
@@ -82,7 +82,7 @@ export function UpcomingInvoices() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Faturas Proximas</CardTitle>
+        <CardTitle>Faturas Próximas</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
@@ -123,7 +123,7 @@ export function UpcomingInvoices() {
                     {daysUntil === 0
                       ? 'Vence hoje'
                       : daysUntil === 1
-                        ? 'Vence amanha'
+                        ? 'Vence amanhã'
                         : `${daysUntil} dias`}
                   </p>
                 </div>

@@ -113,7 +113,7 @@ export function LoginForm() {
       <GoogleAuthButton />
 
       <p className="text-center text-sm text-muted-foreground">
-        Nao tem conta?{' '}
+        Não tem conta?{' '}
         <Link
           to="/register"
           className="font-medium text-primary underline-offset-4 hover:underline"

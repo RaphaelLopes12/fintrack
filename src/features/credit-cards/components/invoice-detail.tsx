@@ -97,7 +97,7 @@ export function InvoiceDetail({
       {/* Billing period info */}
       <div className="rounded-lg bg-muted/50 p-3 text-sm">
         <div className="flex justify-between">
-          <span className="text-muted-foreground">Periodo:</span>
+          <span className="text-muted-foreground">Período:</span>
           <span>
             {formatDateShort(start)} - {formatDateShort(end)}
           </span>
@@ -111,7 +111,7 @@ export function InvoiceDetail({
       {/* Transactions */}
       {transactions.length === 0 ? (
         <div className="py-6 text-center text-sm text-muted-foreground">
-          Nenhuma transacao neste periodo.
+          Nenhuma transação neste período.
         </div>
       ) : (
         <div className="space-y-1">

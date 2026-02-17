@@ -20,7 +20,7 @@ export function RecentTransactions() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Transacoes Recentes</CardTitle>
+          <CardTitle>Transações Recentes</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -41,13 +41,13 @@ export function RecentTransactions() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Transacoes Recentes</CardTitle>
+          <CardTitle>Transações Recentes</CardTitle>
         </CardHeader>
         <CardContent>
           <EmptyState
             icon={Receipt}
-            title="Sem transacoes"
-            description="Nenhuma transacao registrada ainda."
+            title="Sem transações"
+            description="Nenhuma transação registrada ainda."
             className="py-8"
           />
         </CardContent>
@@ -58,7 +58,7 @@ export function RecentTransactions() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Transacoes Recentes</CardTitle>
+        <CardTitle>Transações Recentes</CardTitle>
         <CardAction>
           <Link
             to="/transactions"

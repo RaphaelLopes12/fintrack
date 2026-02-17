@@ -52,7 +52,7 @@ export function RegisterForm() {
       <div className="space-y-2 text-center">
         <h1 className="text-2xl font-bold tracking-tight">Criar conta</h1>
         <p className="text-sm text-muted-foreground">
-          Preencha os dados abaixo para comecar
+          Preencha os dados abaixo para começar
         </p>
       </div>
 
@@ -155,7 +155,7 @@ export function RegisterForm() {
       <GoogleAuthButton />
 
       <p className="text-center text-sm text-muted-foreground">
-        Ja tem conta?{' '}
+        Já tem conta?{' '}
         <Link
           to="/login"
           className="font-medium text-primary underline-offset-4 hover:underline"

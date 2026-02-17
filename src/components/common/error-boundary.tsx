@@ -47,7 +47,7 @@ export class ErrorBoundary extends Component<
           </div>
           <h2 className="mt-4 text-lg font-semibold">Algo deu errado</h2>
           <p className="mt-1 max-w-md text-sm text-muted-foreground">
-            Ocorreu um erro inesperado. Tente novamente ou recarregue a pagina.
+            Ocorreu um erro inesperado. Tente novamente ou recarregue a página.
           </p>
           {this.state.error && (
             <pre className="mt-4 max-w-md overflow-auto rounded-lg bg-muted p-3 text-left text-xs text-muted-foreground">

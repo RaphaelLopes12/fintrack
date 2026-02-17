@@ -47,20 +47,20 @@ function TransactionsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Transacoes"
+        title="Transações"
         description="Gerencie suas receitas e despesas"
       >
         <Button asChild>
           <Link to="/transactions/new">
             <Plus className="size-4" />
-            Nova Transacao
+            Nova Transação
           </Link>
         </Button>
       </PageHeader>
 
       <Tabs defaultValue="transactions">
         <TabsList>
-          <TabsTrigger value="transactions">Transacoes</TabsTrigger>
+          <TabsTrigger value="transactions">Transações</TabsTrigger>
           <TabsTrigger value="categories">Categorias</TabsTrigger>
         </TabsList>
 
@@ -79,13 +79,13 @@ function TransactionsPage() {
           ) : transactions.length === 0 ? (
             <EmptyState
               icon={Receipt}
-              title="Nenhuma transacao encontrada"
-              description="Voce ainda nao possui transacoes para este periodo. Comece adicionando sua primeira transacao."
+              title="Nenhuma transação encontrada"
+              description="Você ainda não possui transações para este período. Comece adicionando sua primeira transação."
               action={
                 <Button asChild>
                   <Link to="/transactions/new">
                     <Plus className="size-4" />
-                    Nova Transacao
+                    Nova Transação
                   </Link>
                 </Button>
               }

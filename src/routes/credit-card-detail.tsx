@@ -62,13 +62,13 @@ function CreditCardDetailPage() {
   if (!card) {
     return (
       <div className="space-y-6">
-        <PageHeader title="Cartao nao encontrado" />
+        <PageHeader title="Cartão não encontrado" />
         <p className="text-muted-foreground">
-          O cartao solicitado nao existe ou foi removido.
+          O cartão solicitado não existe ou foi removido.
         </p>
         <Button variant="outline" onClick={() => navigate('/credit-cards')}>
           <ArrowLeft className="size-4" />
-          Voltar para Cartoes
+          Voltar para Cartões
         </Button>
       </div>
     )
@@ -86,7 +86,7 @@ function CreditCardDetailPage() {
       {/* Header */}
       <PageHeader
         title={card.name}
-        description="Gerencie faturas e assinaturas deste cartao"
+        description="Gerencie faturas e assinaturas deste cartão"
       >
         <Button
           variant="outline"
@@ -138,7 +138,7 @@ function CreditCardDetailPage() {
             Fatura Atual
           </TabsTrigger>
           <TabsTrigger value="history" className="flex-1">
-            Historico
+            Histórico
           </TabsTrigger>
           <TabsTrigger value="subscriptions" className="flex-1">
             Assinaturas
@@ -188,8 +188,8 @@ function CreditCardDetailPage() {
       <ConfirmDialog
         open={isDeleteOpen}
         onOpenChange={setIsDeleteOpen}
-        title="Excluir Cartao"
-        description="Tem certeza que deseja excluir este cartao? Todas as faturas associadas tambem serao removidas. Esta acao nao pode ser desfeita."
+        title="Excluir Cartão"
+        description="Tem certeza que deseja excluir este cartão? Todas as faturas associadas também serão removidas. Esta ação não pode ser desfeita."
         variant="destructive"
         confirmText="Excluir"
         onConfirm={handleDelete}

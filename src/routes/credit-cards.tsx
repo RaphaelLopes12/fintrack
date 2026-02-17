@@ -74,12 +74,12 @@ function CreditCardsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Cartoes de Credito"
-        description="Gerencie seus cartoes e faturas"
+        title="Cartões de Crédito"
+        description="Gerencie seus cartões e faturas"
       >
         <Button onClick={() => setIsFormOpen(true)}>
           <Plus className="size-4" />
-          Adicionar Cartao
+          Adicionar Cartão
         </Button>
       </PageHeader>
 
@@ -96,12 +96,12 @@ function CreditCardsPage() {
       ) : cards.length === 0 ? (
         <EmptyState
           icon={CreditCard}
-          title="Nenhum cartao cadastrado"
-          description="Adicione seu primeiro cartao de credito para comecar a gerenciar suas faturas."
+          title="Nenhum cartão cadastrado"
+          description="Adicione seu primeiro cartão de crédito para começar a gerenciar suas faturas."
           action={
             <Button onClick={() => setIsFormOpen(true)}>
               <Plus className="size-4" />
-              Adicionar Cartao
+              Adicionar Cartão
             </Button>
           }
         />

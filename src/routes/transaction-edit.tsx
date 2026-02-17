@@ -46,8 +46,8 @@ function TransactionEditPage() {
     return (
       <div className="space-y-6">
         <PageHeader
-          title="Editar Transacao"
-          description="Edite os detalhes da transacao"
+          title="Editar Transação"
+          description="Edite os detalhes da transação"
         />
         <Card className="mx-auto max-w-2xl">
           <CardContent className="space-y-4">
@@ -67,8 +67,8 @@ function TransactionEditPage() {
     return (
       <div className="space-y-6">
         <PageHeader
-          title="Transacao nao encontrada"
-          description="A transacao que voce esta procurando nao existe."
+          title="Transação não encontrada"
+          description="A transação que você está procurando não existe."
         />
       </div>
     )
@@ -77,8 +77,8 @@ function TransactionEditPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Editar Transacao"
-        description="Edite os detalhes da transacao"
+        title="Editar Transação"
+        description="Edite os detalhes da transação"
       />
       <Card className="mx-auto max-w-2xl">
         <CardContent>

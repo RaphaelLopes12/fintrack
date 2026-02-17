@@ -47,7 +47,7 @@ export function ProfileSettings() {
 
   function handleSave() {
     if (!fullName.trim()) {
-      toast.error('O nome nao pode estar vazio.')
+      toast.error('O nome não pode estar vazio.')
       return
     }
 
@@ -75,7 +75,7 @@ export function ProfileSettings() {
       <Card>
         <CardHeader>
           <CardTitle>Perfil</CardTitle>
-          <CardDescription>Suas informacoes pessoais</CardDescription>
+          <CardDescription>Suas informações pessoais</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center gap-4">
@@ -95,7 +95,7 @@ export function ProfileSettings() {
     <Card>
       <CardHeader>
         <CardTitle>Perfil</CardTitle>
-        <CardDescription>Suas informacoes pessoais</CardDescription>
+        <CardDescription>Suas informações pessoais</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Avatar section */}
@@ -120,7 +120,7 @@ export function ProfileSettings() {
             </button>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate font-medium">{displayName || 'Usuario'}</p>
+            <p className="truncate font-medium">{displayName || 'Usuário'}</p>
             <p className="truncate text-sm text-muted-foreground">{email}</p>
           </div>
         </div>
@@ -139,7 +139,7 @@ export function ProfileSettings() {
               className="bg-muted"
             />
             <p className="text-xs text-muted-foreground">
-              O e-mail nao pode ser alterado.
+              O e-mail não pode ser alterado.
             </p>
           </div>
 

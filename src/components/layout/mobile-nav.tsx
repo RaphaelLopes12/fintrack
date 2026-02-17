@@ -14,12 +14,12 @@ const navItems = [
     icon: LayoutDashboard,
   },
   {
-    label: 'Transacoes',
+    label: 'Transações',
     href: '/transactions',
     icon: ArrowLeftRight,
   },
   {
-    label: 'Cartoes',
+    label: 'Cartões',
     href: '/credit-cards',
     icon: CreditCard,
   },

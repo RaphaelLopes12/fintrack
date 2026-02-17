@@ -64,7 +64,7 @@ export function AppearanceSettings() {
       { preferred_theme: value },
       {
         onError: () => {
-          toast.error('Erro ao salvar preferencia de tema.')
+          toast.error('Erro ao salvar preferência de tema.')
         },
       }
     )
@@ -73,9 +73,9 @@ export function AppearanceSettings() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Aparencia</CardTitle>
+        <CardTitle>Aparência</CardTitle>
         <CardDescription>
-          Personalize a aparencia do aplicativo
+          Personalize a aparência do aplicativo
         </CardDescription>
       </CardHeader>
       <CardContent>
