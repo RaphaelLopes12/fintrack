@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline - FinTrack</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, sans-serif;
+      background-color: #09090b;
+      color: #fafafa;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background-color: #27272a;
+      margin-bottom: 1.5rem;
+    }
+
+    .icon-wrapper svg {
+      width: 32px;
+      height: 32px;
+      color: #a1a1aa;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: #a1a1aa;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      height: 36px;
+      padding: 0 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #fafafa;
+      background-color: #27272a;
+      border: 1px solid #3f3f46;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background-color: #3f3f46;
+    }
+
+    button:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    button svg {
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon-wrapper">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="2" x2="22" y1="2" y2="22" />
+        <path d="M8.5 16.5a5 5 0 0 1 7 0" />
+        <path d="M2 8.82a15 15 0 0 1 4.17-2.65" />
+        <path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76" />
+        <path d="M16.85 11.25a10 10 0 0 1 2.22 1.68" />
+        <path d="M5 13a10 10 0 0 1 5.24-2.76" />
+        <line x1="12" x2="12.01" y1="20" y2="20" />
+      </svg>
+    </div>
+    <h1>Voce esta offline</h1>
+    <p>Conecte-se a internet para continuar usando o FinTrack.</p>
+    <button onclick="window.location.reload()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+        <path d="M16 16h5v5" />
+      </svg>
+      Tentar novamente
+    </button>
+  </div>
+</body>
+</html>
