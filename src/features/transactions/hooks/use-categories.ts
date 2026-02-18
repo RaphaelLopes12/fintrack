@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useAuth } from '@/features/auth/hooks/use-auth'
 import { categoryService } from '@/features/transactions/services/category.service'
+import { useActiveUserId } from '@/features/sharing/hooks/use-shared-context'
 import type { CategoryInsert, CategoryUpdate } from '@/types'
 
 export const categoryKeys = {
@@ -12,15 +12,15 @@ export const categoryKeys = {
 }
 
 export function useCategories(type?: 'income' | 'expense') {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: categoryKeys.list(type),
+    queryKey: [...categoryKeys.list(type), activeUserId],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuario nao autenticado')
-      return categoryService.getCategories(user.id, type)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return categoryService.getCategories(activeUserId, type)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }
 
@@ -63,12 +63,12 @@ export function useDeleteCategory() {
     mutationFn: (id: string) => categoryService.deleteCategory(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: categoryKeys.all })
-      toast.success('Categoria excluida com sucesso!')
+      toast.success('Categoria excluída com sucesso!')
     },
     onError: (error) => {
       const message =
         error instanceof Error && error.message.includes('foreign key')
-          ? 'Esta categoria possui transacoes vinculadas e nao pode ser excluida.'
+          ? 'Esta categoria possui transacoes vinculadas e não pode ser excluída.'
           : 'Erro ao excluir categoria. Tente novamente.'
       toast.error(message)
     },

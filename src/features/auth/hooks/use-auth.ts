@@ -2,6 +2,8 @@ import { create } from 'zustand'
 import type { Session, User } from '@supabase/supabase-js'
 import { authService } from '@/features/auth/services/auth.service'
 import { profileService } from '@/features/auth/services/profile.service'
+import { sharingService } from '@/features/sharing/services/sharing.service'
+import { useSharedContext } from '@/features/sharing/hooks/use-shared-context'
 
 interface AuthState {
   user: User | null
@@ -49,7 +51,13 @@ export const useAuth = create<AuthState>()((set) => ({
               await profileService.seedDefaultCategories(session.user.id)
             }
           } catch {
-            // Silently handle - categories may already exist
+            /* empty */
+          }
+
+          try {
+            await sharingService.resolvePendingShares()
+          } catch {
+            /* empty */
           }
         }
       }
@@ -79,6 +87,7 @@ export const useAuth = create<AuthState>()((set) => ({
 
   signOut: async () => {
     await authService.signOut()
+    useSharedContext.getState().resetToSelf()
     set({
       user: null,
       session: null,

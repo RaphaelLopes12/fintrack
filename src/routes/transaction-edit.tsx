@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router'
+import { Navigate, useParams, useNavigate } from 'react-router'
 import { format } from 'date-fns'
 
 import { Card, CardContent } from '@/components/ui/card'
@@ -9,14 +9,20 @@ import {
   useTransaction,
   useUpdateTransaction,
 } from '@/features/transactions/hooks/use-transactions'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import type { TransactionFormData } from '@/features/transactions/schemas/transaction.schema'
 
 function TransactionEditPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const canEdit = useCanEdit()
 
   const { data: transaction, isLoading } = useTransaction(id ?? '')
   const updateTransaction = useUpdateTransaction()
+
+  if (!canEdit) {
+    return <Navigate to="/transactions" replace />
+  }
 
   async function handleSubmit(data: TransactionFormData) {
     if (!id) return

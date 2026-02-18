@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { ConfirmDialog } from '@/components/common/confirm-dialog'
 import { formatCurrency } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import type { TransactionWithCategory } from '@/types'
 
 interface TransactionListProps {
@@ -37,6 +38,7 @@ export function TransactionList({
   onEdit,
   onDelete,
 }: TransactionListProps) {
+  const canEdit = useCanEdit()
   const [deleteId, setDeleteId] = useState<string | null>(null)
 
   const grouped = groupByDate(transactions)
@@ -102,23 +104,24 @@ export function TransactionList({
                     {formatCurrency(tx.amount)}
                   </span>
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-1">
-                    <Button
-                      variant="ghost"
-                      size="icon-xs"
-                      onClick={() => onEdit(tx.id)}
-                    >
-                      <Pencil className="size-3.5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon-xs"
-                      onClick={() => setDeleteId(tx.id)}
-                    >
-                      <Trash2 className="size-3.5 text-destructive" />
-                    </Button>
-                  </div>
+                  {canEdit && (
+                    <div className="flex items-center gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon-xs"
+                        onClick={() => onEdit(tx.id)}
+                      >
+                        <Pencil className="size-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon-xs"
+                        onClick={() => setDeleteId(tx.id)}
+                      >
+                        <Trash2 className="size-3.5 text-destructive" />
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -161,24 +164,26 @@ export function TransactionList({
                     </Badge>
                   )}
 
-                  <div className="mt-3 flex items-center justify-end gap-1">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => onEdit(tx.id)}
-                    >
-                      <Pencil className="size-3.5" />
-                      Editar
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setDeleteId(tx.id)}
-                    >
-                      <Trash2 className="size-3.5 text-destructive" />
-                      Excluir
-                    </Button>
-                  </div>
+                  {canEdit && (
+                    <div className="mt-3 flex items-center justify-end gap-1">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onEdit(tx.id)}
+                      >
+                        <Pencil className="size-3.5" />
+                        Editar
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setDeleteId(tx.id)}
+                      >
+                        <Trash2 className="size-3.5 text-destructive" />
+                        Excluir
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

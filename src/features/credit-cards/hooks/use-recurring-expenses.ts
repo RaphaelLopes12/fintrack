@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useAuth } from '@/features/auth/hooks/use-auth'
 import { recurringExpenseService } from '@/features/credit-cards/services/recurring-expense.service'
+import { useActiveUserId } from '@/features/sharing/hooks/use-shared-context'
 import type { RecurringExpenseInsert, RecurringExpenseUpdate } from '@/types'
 
 export const recurringKeys = {
@@ -11,15 +11,15 @@ export const recurringKeys = {
 }
 
 export function useRecurringExpenses(cardId?: string) {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: recurringKeys.list(cardId),
+    queryKey: [...recurringKeys.list(cardId), activeUserId],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuario nao autenticado')
-      return recurringExpenseService.getRecurringExpenses(user.id, cardId)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return recurringExpenseService.getRecurringExpenses(activeUserId, cardId)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }
 
@@ -86,7 +86,7 @@ export function useDeleteRecurringExpense() {
       recurringExpenseService.deleteRecurringExpense(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: recurringKeys.all })
-      toast.success('Assinatura excluida com sucesso!')
+      toast.success('Assinatura excluída com sucesso!')
     },
     onError: () => {
       toast.error('Erro ao excluir assinatura. Tente novamente.')

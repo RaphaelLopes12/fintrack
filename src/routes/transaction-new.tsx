@@ -1,23 +1,28 @@
-import { useNavigate } from 'react-router'
+import { Navigate, useNavigate } from 'react-router'
 import { format } from 'date-fns'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { PageHeader } from '@/components/common/page-header'
 import { TransactionForm } from '@/features/transactions/components/transaction-form'
 import { useCreateTransaction } from '@/features/transactions/hooks/use-transactions'
-import { useAuth } from '@/features/auth/hooks/use-auth'
+import { useActiveUserId, useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import type { TransactionFormData } from '@/features/transactions/schemas/transaction.schema'
 
 function TransactionNewPage() {
   const navigate = useNavigate()
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
+  const canEdit = useCanEdit()
   const createTransaction = useCreateTransaction()
 
+  if (!canEdit) {
+    return <Navigate to="/transactions" replace />
+  }
+
   async function handleSubmit(data: TransactionFormData) {
-    if (!user?.id) return
+    if (!activeUserId) return
 
     await createTransaction.mutateAsync({
-      user_id: user.id,
+      user_id: activeUserId,
       type: data.type,
       amount: data.amount,
       description: data.description,

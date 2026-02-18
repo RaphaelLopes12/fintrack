@@ -12,6 +12,7 @@ import {
   useToggleRecurringExpense,
   useDeleteRecurringExpense,
 } from '@/features/credit-cards/hooks/use-recurring-expenses'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import { RecurringExpenseForm } from '@/features/credit-cards/components/recurring-expense-form'
 import { formatCurrency } from '@/lib/format'
 import { FREQUENCIES } from '@/lib/constants'
@@ -27,6 +28,7 @@ function getFrequencyLabel(frequency: string): string {
 }
 
 export function RecurringExpenseList({ cardId }: RecurringExpenseListProps) {
+  const canEdit = useCanEdit()
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingExpense, setEditingExpense] = useState<
     (RecurringExpense & { category?: { name: string; color: string } }) | null
@@ -53,10 +55,12 @@ export function RecurringExpenseList({ cardId }: RecurringExpenseListProps) {
         <h3 className="text-sm font-medium text-muted-foreground">
           Assinaturas e Recorrências
         </h3>
-        <Button size="sm" onClick={() => setIsFormOpen(true)}>
-          <Plus className="size-4" />
-          Adicionar
-        </Button>
+        {canEdit && (
+          <Button size="sm" onClick={() => setIsFormOpen(true)}>
+            <Plus className="size-4" />
+            Adicionar
+          </Button>
+        )}
       </div>
 
       {expenses.length === 0 ? (
@@ -72,6 +76,7 @@ export function RecurringExpenseList({ cardId }: RecurringExpenseListProps) {
                 <div className="flex items-center gap-3">
                   <Switch
                     checked={expense.is_active}
+                    disabled={!canEdit}
                     onCheckedChange={(checked) =>
                       toggleExpense.mutate({
                         id: expense.id,
@@ -111,24 +116,26 @@ export function RecurringExpenseList({ cardId }: RecurringExpenseListProps) {
                   {!expense.is_active && (
                     <Badge variant="secondary">Inativa</Badge>
                   )}
-                  <div className="flex items-center gap-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-8"
-                      onClick={() => setEditingExpense(expense)}
-                    >
-                      <Pencil className="size-3.5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-8 text-destructive hover:text-destructive"
-                      onClick={() => setDeletingId(expense.id)}
-                    >
-                      <Trash2 className="size-3.5" />
-                    </Button>
-                  </div>
+                  {canEdit && (
+                    <div className="flex items-center gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="size-8"
+                        onClick={() => setEditingExpense(expense)}
+                      >
+                        <Pencil className="size-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="size-8 text-destructive hover:text-destructive"
+                        onClick={() => setDeletingId(expense.id)}
+                      >
+                        <Trash2 className="size-3.5" />
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>

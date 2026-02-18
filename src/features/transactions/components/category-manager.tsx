@@ -11,12 +11,14 @@ import {
   useCategories,
   useDeleteCategory,
 } from '@/features/transactions/hooks/use-categories'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import { categoryService } from '@/features/transactions/services/category.service'
 import { CategoryForm } from '@/features/transactions/components/category-form'
 import type { CategoryFormData } from '@/features/transactions/schemas/category.schema'
 import type { Category } from '@/types'
 
 export function CategoryManager() {
+  const canEdit = useCanEdit()
   const [formOpen, setFormOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<
     (CategoryFormData & { id: string }) | undefined
@@ -107,20 +109,24 @@ export function CategoryManager() {
                   Padrão
                 </Badge>
               )}
-              <Button
-                variant="ghost"
-                size="icon-xs"
-                onClick={() => handleEdit(category)}
-              >
-                <Pencil className="size-3" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon-xs"
-                onClick={() => handleDeleteClick(category)}
-              >
-                <Trash2 className="size-3 text-destructive" />
-              </Button>
+              {canEdit && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon-xs"
+                    onClick={() => handleEdit(category)}
+                  >
+                    <Pencil className="size-3" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon-xs"
+                    onClick={() => handleDeleteClick(category)}
+                  >
+                    <Trash2 className="size-3 text-destructive" />
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         ))}
@@ -133,10 +139,12 @@ export function CategoryManager() {
       <Card>
         <CardHeader className="flex-row items-center justify-between">
           <CardTitle>Categorias</CardTitle>
-          <Button size="sm" onClick={handleAddNew}>
-            <Plus className="size-4" />
-            Adicionar Categoria
-          </Button>
+          {canEdit && (
+            <Button size="sm" onClick={handleAddNew}>
+              <Plus className="size-4" />
+              Adicionar Categoria
+            </Button>
+          )}
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="expense">

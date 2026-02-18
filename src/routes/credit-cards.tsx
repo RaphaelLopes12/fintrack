@@ -9,6 +9,7 @@ import { EmptyState } from '@/components/common/empty-state'
 import { CreditCardVisual } from '@/features/credit-cards/components/credit-card-visual'
 import { CreditCardForm } from '@/features/credit-cards/components/credit-card-form'
 import { useCreditCards } from '@/features/credit-cards/hooks/use-credit-cards'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import { useInvoicesByCard } from '@/features/credit-cards/hooks/use-invoices'
 import { formatCurrency, formatDateShort } from '@/lib/format'
 import { getCurrentMonth, getCurrentYear, getInvoiceDueDate } from '@/lib/date'
@@ -68,6 +69,7 @@ function CardSummary({ card }: { card: CreditCardType }) {
 }
 
 function CreditCardsPage() {
+  const canEdit = useCanEdit()
   const [isFormOpen, setIsFormOpen] = useState(false)
   const { data: cards = [], isLoading } = useCreditCards()
 
@@ -77,10 +79,12 @@ function CreditCardsPage() {
         title="Cartões de Crédito"
         description="Gerencie seus cartões e faturas"
       >
-        <Button onClick={() => setIsFormOpen(true)}>
-          <Plus className="size-4" />
-          Adicionar Cartão
-        </Button>
+        {canEdit && (
+          <Button onClick={() => setIsFormOpen(true)}>
+            <Plus className="size-4" />
+            Adicionar Cartão
+          </Button>
+        )}
       </PageHeader>
 
       {isLoading ? (
@@ -99,10 +103,12 @@ function CreditCardsPage() {
           title="Nenhum cartão cadastrado"
           description="Adicione seu primeiro cartão de crédito para começar a gerenciar suas faturas."
           action={
-            <Button onClick={() => setIsFormOpen(true)}>
-              <Plus className="size-4" />
-              Adicionar Cartão
-            </Button>
+            canEdit ? (
+              <Button onClick={() => setIsFormOpen(true)}>
+                <Plus className="size-4" />
+                Adicionar Cartão
+              </Button>
+            ) : undefined
           }
         />
       ) : (

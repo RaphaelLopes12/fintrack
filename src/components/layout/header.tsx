@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { ThemeToggle } from '@/components/layout/theme-toggle'
+import { ContextSwitcher } from '@/components/layout/context-switcher'
 
 const pageTitles: Record<string, string> = {
   '/': 'Dashboard',
@@ -83,7 +84,8 @@ export function Header() {
       <h1 className="text-lg font-semibold">{pageTitle}</h1>
 
       <div className="ml-auto flex items-center gap-2">
-        {/* Theme toggle */}
+        <ContextSwitcher />
+
         <ThemeToggle />
 
         <Separator orientation="vertical" className="mx-1 h-6" />

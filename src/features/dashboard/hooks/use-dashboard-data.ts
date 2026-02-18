@@ -1,43 +1,44 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuth } from '@/features/auth/hooks/use-auth'
 import { dashboardService } from '@/features/dashboard/services/dashboard.service'
+import { useActiveUserId } from '@/features/sharing/hooks/use-shared-context'
 
 export function useMonthlySummary(month: number, year: number) {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: ['dashboard', 'summary', month, year],
+    queryKey: ['dashboard', 'summary', activeUserId, month, year],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuário não autenticado')
-      return dashboardService.getMonthlySummary(user.id, month, year)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return dashboardService.getMonthlySummary(activeUserId, month, year)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }
 
 export function useCategoryBreakdown(month: number, year: number) {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: ['dashboard', 'category-breakdown', month, year],
+    queryKey: ['dashboard', 'category-breakdown', activeUserId, month, year],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuário não autenticado')
-      return dashboardService.getCategoryBreakdown(user.id, month, year)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return dashboardService.getCategoryBreakdown(activeUserId, month, year)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }
 
 export function useRecentTransactions(limit: number = 5) {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: ['dashboard', 'recent-transactions', limit],
+    queryKey: ['dashboard', 'recent-transactions', activeUserId, limit],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuário não autenticado')
-      return dashboardService.getRecentTransactions(user.id, limit)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return dashboardService.getRecentTransactions(activeUserId, limit)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }
 
@@ -55,14 +56,14 @@ export function useUpcomingInvoices() {
 }
 
 export function useMonthlyTrend(months: number = 6) {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: ['dashboard', 'monthly-trend', months],
+    queryKey: ['dashboard', 'monthly-trend', activeUserId, months],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuário não autenticado')
-      return dashboardService.getMonthlyTrend(user.id, months)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return dashboardService.getMonthlyTrend(activeUserId, months)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }

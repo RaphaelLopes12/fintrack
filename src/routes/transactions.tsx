@@ -16,10 +16,12 @@ import {
   useTransactions,
   useDeleteTransaction,
 } from '@/features/transactions/hooks/use-transactions'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import { getCurrentMonth, getCurrentYear } from '@/lib/date'
 
 function TransactionsPage() {
   const navigate = useNavigate()
+  const canEdit = useCanEdit()
 
   const [filters, setFilters] = useState<TransactionFilterState>({
     month: getCurrentMonth(),
@@ -50,12 +52,14 @@ function TransactionsPage() {
         title="Transações"
         description="Gerencie suas receitas e despesas"
       >
-        <Button asChild>
-          <Link to="/transactions/new">
-            <Plus className="size-4" />
-            Nova Transação
-          </Link>
-        </Button>
+        {canEdit && (
+          <Button asChild>
+            <Link to="/transactions/new">
+              <Plus className="size-4" />
+              Nova Transação
+            </Link>
+          </Button>
+        )}
       </PageHeader>
 
       <Tabs defaultValue="transactions">
@@ -82,12 +86,14 @@ function TransactionsPage() {
               title="Nenhuma transação encontrada"
               description="Você ainda não possui transações para este período. Comece adicionando sua primeira transação."
               action={
-                <Button asChild>
-                  <Link to="/transactions/new">
-                    <Plus className="size-4" />
-                    Nova Transação
-                  </Link>
-                </Button>
+                canEdit ? (
+                  <Button asChild>
+                    <Link to="/transactions/new">
+                      <Plus className="size-4" />
+                      Nova Transação
+                    </Link>
+                  </Button>
+                ) : undefined
               }
             />
           ) : (

@@ -21,6 +21,7 @@ import {
   useCreditCard,
   useDeleteCreditCard,
 } from '@/features/credit-cards/hooks/use-credit-cards'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import { formatCurrency } from '@/lib/format'
 import { getCurrentMonth, getCurrentYear } from '@/lib/date'
 
@@ -31,6 +32,7 @@ function CreditCardDetailPage() {
   const { data: card, isLoading } = useCreditCard(id ?? '')
   const deleteCard = useDeleteCreditCard()
 
+  const canEdit = useCanEdit()
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
@@ -95,17 +97,21 @@ function CreditCardDetailPage() {
         >
           <ArrowLeft className="size-4" />
         </Button>
-        <Button variant="outline" size="icon" onClick={() => setIsEditOpen(true)}>
-          <Pencil className="size-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="text-destructive hover:text-destructive"
-          onClick={() => setIsDeleteOpen(true)}
-        >
-          <Trash2 className="size-4" />
-        </Button>
+        {canEdit && (
+          <>
+            <Button variant="outline" size="icon" onClick={() => setIsEditOpen(true)}>
+              <Pencil className="size-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="text-destructive hover:text-destructive"
+              onClick={() => setIsDeleteOpen(true)}
+            >
+              <Trash2 className="size-4" />
+            </Button>
+          </>
+        )}
       </PageHeader>
 
       {/* Card Visual */}

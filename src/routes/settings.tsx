@@ -5,6 +5,7 @@ import { AppearanceSettings } from '@/features/settings/components/appearance-se
 import { CategoryManager } from '@/features/transactions/components/category-manager'
 import { DataSettings } from '@/features/settings/components/data-settings'
 import { AccountSettings } from '@/features/settings/components/account-settings'
+import { SharingSettings } from '@/features/sharing/components/sharing-settings'
 
 function SettingsPage() {
   return (
@@ -20,6 +21,7 @@ function SettingsPage() {
           <TabsTrigger value="appearance">Aparência</TabsTrigger>
           <TabsTrigger value="categories">Categorias</TabsTrigger>
           <TabsTrigger value="data">Dados</TabsTrigger>
+          <TabsTrigger value="sharing">Compartilhamento</TabsTrigger>
           <TabsTrigger value="account">Conta</TabsTrigger>
         </TabsList>
 
@@ -37,6 +39,10 @@ function SettingsPage() {
 
         <TabsContent value="data" className="mt-6">
           <DataSettings />
+        </TabsContent>
+
+        <TabsContent value="sharing" className="mt-6">
+          <SharingSettings />
         </TabsContent>
 
         <TabsContent value="account" className="mt-6">

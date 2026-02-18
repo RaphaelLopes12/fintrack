@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useAuth } from '@/features/auth/hooks/use-auth'
 import { creditCardService } from '@/features/credit-cards/services/credit-card.service'
+import { useActiveUserId } from '@/features/sharing/hooks/use-shared-context'
 import type { CreditCardInsert, CreditCardUpdate } from '@/types'
 
 export const creditCardKeys = {
@@ -13,15 +13,15 @@ export const creditCardKeys = {
 }
 
 export function useCreditCards() {
-  const user = useAuth((state) => state.user)
+  const activeUserId = useActiveUserId()
 
   return useQuery({
-    queryKey: creditCardKeys.list(),
+    queryKey: [...creditCardKeys.list(), activeUserId],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuario nao autenticado')
-      return creditCardService.getCreditCards(user.id)
+      if (!activeUserId) throw new Error('Usuário não autenticado')
+      return creditCardService.getCreditCards(activeUserId)
     },
-    enabled: !!user?.id,
+    enabled: !!activeUserId,
   })
 }
 
@@ -41,10 +41,10 @@ export function useCreateCreditCard() {
       creditCardService.createCreditCard(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: creditCardKeys.lists() })
-      toast.success('Cartao criado com sucesso!')
+      toast.success('Cartão criado com sucesso!')
     },
     onError: () => {
-      toast.error('Erro ao criar cartao. Tente novamente.')
+      toast.error('Erro ao criar cartão. Tente novamente.')
     },
   })
 }
@@ -57,10 +57,10 @@ export function useUpdateCreditCard() {
       creditCardService.updateCreditCard(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: creditCardKeys.all })
-      toast.success('Cartao atualizado com sucesso!')
+      toast.success('Cartão atualizado com sucesso!')
     },
     onError: () => {
-      toast.error('Erro ao atualizar cartao. Tente novamente.')
+      toast.error('Erro ao atualizar cartão. Tente novamente.')
     },
   })
 }
@@ -72,10 +72,10 @@ export function useDeleteCreditCard() {
     mutationFn: (id: string) => creditCardService.deleteCreditCard(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: creditCardKeys.all })
-      toast.success('Cartao excluido com sucesso!')
+      toast.success('Cartão excluído com sucesso!')
     },
     onError: () => {
-      toast.error('Erro ao excluir cartao. Tente novamente.')
+      toast.error('Erro ao excluir cartão. Tente novamente.')
     },
   })
 }

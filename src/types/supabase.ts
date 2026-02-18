@@ -220,6 +220,39 @@ export interface Database {
           },
         ]
       }
+      shared_access: {
+        Row: {
+          id: string
+          owner_id: string
+          shared_with_id: string | null
+          shared_with_email: string
+          permission: 'viewer' | 'editor'
+          status: 'pending' | 'accepted' | 'rejected'
+          created_at: string
+          accepted_at: string | null
+        }
+        Insert: {
+          id?: string
+          owner_id: string
+          shared_with_id?: string | null
+          shared_with_email: string
+          permission?: 'viewer' | 'editor'
+          status?: 'pending' | 'accepted' | 'rejected'
+          created_at?: string
+          accepted_at?: string | null
+        }
+        Update: {
+          id?: string
+          owner_id?: string
+          shared_with_id?: string | null
+          shared_with_email?: string
+          permission?: 'viewer' | 'editor'
+          status?: 'pending' | 'accepted' | 'rejected'
+          created_at?: string
+          accepted_at?: string | null
+        }
+        Relationships: []
+      }
       recurring_expenses: {
         Row: {
           id: string
@@ -317,6 +350,18 @@ export interface Database {
           p_user_id: string
         }
         Returns: undefined
+      }
+      resolve_pending_shares: {
+        Args: Record<string, never>
+        Returns: undefined
+      }
+      check_user_exists: {
+        Args: {
+          p_email: string
+        }
+        Returns: {
+          user_name: string
+        }[]
       }
     }
     Enums: Record<string, never>

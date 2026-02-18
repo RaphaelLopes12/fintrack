@@ -24,6 +24,10 @@ export type RecurringExpense = Database['public']['Tables']['recurring_expenses'
 export type RecurringExpenseInsert = Database['public']['Tables']['recurring_expenses']['Insert']
 export type RecurringExpenseUpdate = Database['public']['Tables']['recurring_expenses']['Update']
 
+export type SharedAccess = Database['public']['Tables']['shared_access']['Row']
+export type SharedAccessInsert = Database['public']['Tables']['shared_access']['Insert']
+export type SharedAccessUpdate = Database['public']['Tables']['shared_access']['Update']
+
 export type TransactionWithCategory = Transaction & {
   category: Category
 }

@@ -11,7 +11,7 @@ export function useProfile() {
   return useQuery({
     queryKey: [...PROFILE_QUERY_KEY, user?.id],
     queryFn: () => {
-      if (!user?.id) throw new Error('Usuario nao autenticado')
+      if (!user?.id) throw new Error('Usuário não autenticado')
       return profileService.getProfile(user.id)
     },
     enabled: !!user?.id,
@@ -24,7 +24,7 @@ export function useUpdateProfile() {
 
   return useMutation({
     mutationFn: (data: Omit<ProfileUpdate, 'id'>) => {
-      if (!user?.id) throw new Error('Usuario nao autenticado')
+      if (!user?.id) throw new Error('Usuário não autenticado')
       return profileService.updateProfile(user.id, data)
     },
     onSuccess: () => {

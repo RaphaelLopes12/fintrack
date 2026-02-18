@@ -15,6 +15,7 @@ import {
   useMarkInvoicePaid,
   useMarkInvoiceUnpaid,
 } from '@/features/credit-cards/hooks/use-invoices'
+import { useCanEdit } from '@/features/sharing/hooks/use-shared-context'
 import { invoiceService } from '@/features/credit-cards/services/invoice.service'
 import { formatCurrency, formatDateShort } from '@/lib/format'
 import { getBillingPeriod, getInvoiceDueDate } from '@/lib/date'
@@ -59,6 +60,7 @@ export function InvoiceDetail({
   const isPaid = invoice?.is_paid ?? false
   const isOverdue = !isPaid && isBefore(dueDateObj, today)
 
+  const canEdit = useCanEdit()
   const isToggling = markPaid.isPending || markUnpaid.isPending
 
   if (isLoadingTx || isLoadingInvoice) {
@@ -149,7 +151,7 @@ export function InvoiceDetail({
       </div>
 
       {/* Pay/Unpay button */}
-      {invoice && (
+      {invoice && canEdit && (
         <Button
           className="w-full"
           variant={isPaid ? 'outline' : 'default'}
