@@ -19,7 +19,7 @@ export function ImportUploadStep({
   const handleFile = useCallback(
     (file: File) => {
       const ext = file.name.split('.').pop()?.toLowerCase()
-      if (ext !== 'csv' && ext !== 'ofx') {
+      if (ext !== 'csv' && ext !== 'ofx' && ext !== 'pdf') {
         return
       }
       onFileParsed(file)
@@ -70,7 +70,7 @@ export function ImportUploadStep({
         <input
           ref={inputRef}
           type="file"
-          accept=".csv,.ofx"
+          accept=".csv,.ofx,.pdf"
           className="hidden"
           onChange={(e) => {
             const file = e.target.files?.[0]
@@ -105,7 +105,7 @@ export function ImportUploadStep({
                   : 'Arraste um arquivo ou clique para selecionar'}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                Formatos aceitos: CSV e OFX
+                Formatos aceitos: CSV, OFX e PDF
               </p>
             </div>
             <Button type="button" variant="outline" size="sm">
@@ -122,7 +122,7 @@ export function ImportUploadStep({
         </p>
         <p className="text-xs text-muted-foreground">
           Nubank, Itaú, Bradesco, Santander, Banco do Brasil, Inter, C6, Caixa
-          e outros que exportem em CSV ou OFX.
+          e outros que exportem em CSV, OFX ou PDF (extrato).
         </p>
       </div>
     </div>

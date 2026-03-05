@@ -1,5 +1,11 @@
+import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist'
 import type { Category, TransactionWithCategory } from '@/types'
 import type { ParsedTransaction, ParseResult } from '../types/import.types'
+
+GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString()
 
 function extractOFXField(block: string, fieldName: string): string | null {
   const regex = new RegExp(`<${fieldName}>([^<\\r\\n]+)`, 'i')
@@ -243,50 +249,117 @@ function parseCSV(content: string): ParsedTransaction[] {
   return transactions
 }
 
-export function parseImportFile(file: File): Promise<ParseResult> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    const fileName = file.name
-    const extension = fileName.split('.').pop()?.toLowerCase()
+const PDF_LINE_REGEX = /^(\d{2}\/\d{2}\/\d{4})\s+(.+?)\s+(-?[\d.,]+)$/
 
-    reader.onload = (e) => {
-      const content = e.target?.result as string
+function parsePDFLine(line: string): ParsedTransaction | null {
+  const match = line.trim().match(PDF_LINE_REGEX)
+  if (!match) return null
 
-      try {
-        let transactions: ParsedTransaction[]
-        let fileType: 'csv' | 'ofx'
+  const [, dateStr, description, amountStr] = match
 
-        if (extension === 'ofx') {
-          transactions = parseOFX(content)
-          fileType = 'ofx'
-        } else {
-          transactions = parseCSV(content)
-          fileType = 'csv'
-        }
+  if (/saldo do dia/i.test(description)) return null
 
-        if (transactions.length === 0) {
-          resolve({
-            transactions: [],
-            fileType: fileType,
-            fileName,
-            errors: ['Nenhuma transação encontrada no arquivo.'],
-          })
-          return
-        }
+  const [day, month, year] = dateStr.split('/')
+  const date = `${year}-${month}-${day}`
 
-        resolve({ transactions, fileType, fileName, errors: [] })
-      } catch (error) {
-        reject(
-          new Error(
-            `Erro ao processar o arquivo: ${error instanceof Error ? error.message : 'Formato inválido'}`
-          )
-        )
+  const rawAmount = parseBrazilianNumber(amountStr)
+  if (rawAmount === 0) return null
+
+  const type: 'income' | 'expense' = rawAmount < 0 ? 'expense' : 'income'
+
+  return {
+    id: crypto.randomUUID(),
+    date,
+    description: description.trim(),
+    amount: Math.abs(rawAmount),
+    type,
+    originalDescription: description.trim(),
+    selected: true,
+    categoryId: null,
+    isDuplicate: false,
+  }
+}
+
+async function parsePDF(buffer: ArrayBuffer): Promise<ParsedTransaction[]> {
+  const pdf = await getDocument({ data: buffer }).promise
+  const transactions: ParsedTransaction[] = []
+
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i)
+    const content = await page.getTextContent()
+
+    const items = content.items as Array<{ str: string; transform: number[] }>
+    const lineMap = new Map<number, Array<{ x: number; str: string }>>()
+
+    for (const item of items) {
+      const y = Math.round(item.transform[5])
+      if (!lineMap.has(y)) lineMap.set(y, [])
+      lineMap.get(y)!.push({ x: item.transform[4], str: item.str })
+    }
+
+    const sortedYs = [...lineMap.keys()].sort((a, b) => b - a)
+
+    for (const y of sortedYs) {
+      const parts = lineMap.get(y)!.sort((a, b) => a.x - b.x)
+      const lineText = parts.map((p) => p.str).join(' ')
+      const tx = parsePDFLine(lineText)
+      if (tx) transactions.push(tx)
+    }
+  }
+
+  return transactions
+}
+
+export async function parseImportFile(file: File): Promise<ParseResult> {
+  const fileName = file.name
+  const extension = fileName.split('.').pop()?.toLowerCase()
+
+  try {
+    if (extension === 'pdf') {
+      const buffer = await file.arrayBuffer()
+      const transactions = await parsePDF(buffer)
+
+      return {
+        transactions,
+        fileType: 'pdf',
+        fileName,
+        errors: transactions.length === 0
+          ? ['Nenhuma transação encontrada no PDF.']
+          : [],
       }
     }
 
-    reader.onerror = () => reject(new Error('Erro ao ler o arquivo.'))
-    reader.readAsText(file, extension === 'ofx' ? 'iso-8859-1' : 'utf-8')
-  })
+    const content = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (e) => resolve(e.target?.result as string)
+      reader.onerror = () => reject(new Error('Erro ao ler o arquivo.'))
+      reader.readAsText(file, extension === 'ofx' ? 'iso-8859-1' : 'utf-8')
+    })
+
+    let transactions: ParsedTransaction[]
+    let fileType: 'csv' | 'ofx'
+
+    if (extension === 'ofx') {
+      transactions = parseOFX(content)
+      fileType = 'ofx'
+    } else {
+      transactions = parseCSV(content)
+      fileType = 'csv'
+    }
+
+    return {
+      transactions,
+      fileType,
+      fileName,
+      errors: transactions.length === 0
+        ? ['Nenhuma transação encontrada no arquivo.']
+        : [],
+    }
+  } catch (error) {
+    throw new Error(
+      `Erro ao processar o arquivo: ${error instanceof Error ? error.message : 'Formato inválido'}`
+    )
+  }
 }
 
 const CATEGORY_KEYWORDS: Record<string, string[]> = {

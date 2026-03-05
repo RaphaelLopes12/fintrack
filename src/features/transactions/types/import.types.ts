@@ -14,7 +14,7 @@ export interface ParsedTransaction {
 
 export interface ParseResult {
   transactions: ParsedTransaction[]
-  fileType: 'csv' | 'ofx'
+  fileType: 'csv' | 'ofx' | 'pdf'
   fileName: string
   errors: string[]
 }
